@@ -1,16 +1,24 @@
-const { createUserDB, getUsersByEmailDB, checkUserByIdPwdDB } = require('../repository/auth.repository')
+const { createUserDB, getUsersByEmailDB } = require('../repository/auth.repository')
+const bcrypt = require('bcrypt');
+
+const saltround = 10;
 
 async function createUser(name, surname, email, pwd) {
     const foundUser = await getUsersByEmailDB(email)
     if (foundUser.length) throw new Error('est takoi')
-    await createUserDB(name, surname, email, pwd)
+    const hashedPwd = await bcrypt.hash(pwd, saltround)
+
+    await createUserDB(name, surname, email, hashedPwd)
+
 }
 
 async function doAuthorisation(email, pwd) {
     const foundUser = await getUsersByEmailDB(email)
-    if (foundUser.length) throw new Error('est takoi')
-    const user = await checkUserByIdPwdDB(pwd)
-    if (!user.length) throw new Error('Пароль не совпадает');
+    if (!foundUser.length) throw new Error('net  takogo')
+
+    const hashedPwd = foundUser[0].pwd
+
+    if (!(await bcrypt.compare(pwd, hashedPwd))) throw new Error('error pwd')
 }
 
 module.exports = { createUser, doAuthorisation }
