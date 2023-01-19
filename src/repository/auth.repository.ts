@@ -1,7 +1,7 @@
-const { pool } = require('../DB');
-const bcrypt = require('bcrypt');
+import { pool } from '../DB';
+import { iUser } from '../interfaces/interfaces';
 
-async function createUserDB(name, surname, email, pwd) {
+async function createUserDB(name: string, surname: string, email: string, pwd: string): Promise<void> {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -11,16 +11,15 @@ async function createUserDB(name, surname, email, pwd) {
     await client.query('COMMIT');
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
-    return [];
+    console.log(error);
   }
 }
 
-async function getUsersByEmailDB(email) {
+async function getUsersByEmailDB(email: string): Promise<iUser[]> {
   const client = await pool.connect();
   const sql = 'SELECT * FROM users WHERE email = $1';
   const data = (await client.query(sql, [email])).rows;
   return data;
 }
 
-module.exports = { createUserDB, getUsersByEmailDB };
+export { createUserDB, getUsersByEmailDB };

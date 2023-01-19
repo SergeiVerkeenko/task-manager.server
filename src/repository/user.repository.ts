@@ -1,4 +1,5 @@
-const { pool } = require('../DB');
+import { pool } from '../DB';
+import { iUser } from '../interfaces/interfaces';
 
 async function getUsersDB() {
   const client = await pool.connect();
@@ -7,14 +8,14 @@ async function getUsersDB() {
   return data;
 }
 
-async function getUsersByIdDB(id) {
+async function getUsersByIdDB(id: number) {
   const client = await pool.connect();
   const sql = 'SELECT * FROM users WHERE id=$1';
   const data = (await client.query(sql, [id])).rows;
   return data;
 }
 
-async function updateUsersDB(id, name, surname, pwd, email, status) {
+async function updateUsersDB(id: number, name: string, surname: string, pwd: string, email: string, status: number) {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -24,12 +25,12 @@ async function updateUsersDB(id, name, surname, pwd, email, status) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function deleteUsersDB(id) {
+async function deleteUsersDB(id: number) {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -39,12 +40,12 @@ async function deleteUsersDB(id) {
     return data;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(error.message);
+    console.log(error);
     return [];
   }
 }
 
-async function pachtUsersDB(id, dataFromClient) {
+async function pachtUsersDB(id: number, dataFromClient: iUser) {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -59,15 +60,9 @@ async function pachtUsersDB(id, dataFromClient) {
     return data2;
   } catch (error) {
     await client.query('ROLLBACK');
-    console.log(`pachtUsersDB ${error.message}`);
+    console.log(`pachtUsersDB ${error}`);
     return [];
   }
 }
 
-module.exports = {
-  getUsersDB,
-  getUsersByIdDB,
-  updateUsersDB,
-  deleteUsersDB,
-  pachtUsersDB,
-};
+export { getUsersDB, getUsersByIdDB, updateUsersDB, deleteUsersDB, pachtUsersDB };

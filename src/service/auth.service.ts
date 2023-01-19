@@ -1,10 +1,10 @@
-const { createUserDB, getUsersByEmailDB } = require('../repository/auth.repository');
-const ExceptionType = require('../helper/exceptions.type');
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
+import { createUserDB, getUsersByEmailDB } from '../repository/auth.repository';
+import ExceptionType from '../helper/exceptions.type';
 
 const saltround = 10;
 
-async function createUser(name, surname, email, pwd) {
+async function createUser(name: string, surname: string, email: string, pwd: string): Promise<void> {
   const foundUser = await getUsersByEmailDB(email);
   if (foundUser.length) throw new Error(ExceptionType.CREATE_TASK_NOT_FOUND.message);
   const hashedPwd = await bcrypt.hash(pwd, saltround);
@@ -12,7 +12,7 @@ async function createUser(name, surname, email, pwd) {
   await createUserDB(name, surname, email, hashedPwd);
 }
 
-async function doAuthorisation(email, pwd) {
+async function doAuthorisation(email: string, pwd: string): Promise<void> {
   const foundUser = await getUsersByEmailDB(email);
   if (!foundUser.length) throw new Error(ExceptionType.AUTH_USER_WITH_EMAIL.message);
 
@@ -21,4 +21,4 @@ async function doAuthorisation(email, pwd) {
   if (!(await bcrypt.compare(pwd, hashedPwd))) throw new Error(ExceptionType.AUTH_USER_WITH_PWD.message);
 }
 
-module.exports = { createUser, doAuthorisation };
+export { createUser, doAuthorisation };
