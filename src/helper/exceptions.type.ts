@@ -16,7 +16,9 @@ const ExceptionType = {
     id: 5,
     message: 'patchUsers: this user is not defind.',
   },
-  USER_ID_NOT_FOUND: { id: 6, message: 'This id is empty.' },
+  USER_ID_NOT_FOUND: { 
+    id: 6, message: 'This id is empty.' 
+  },
   USER_ID_NOT_VALID: { id: 7, message: 'This id is not valid.' },
   USER_NAME_NOT_FOUND: { id: 8, message: 'This name is empty.' },
   USER_SURNAME_NOT_FOUND: { id: 9, message: 'This surname is empty.' },
