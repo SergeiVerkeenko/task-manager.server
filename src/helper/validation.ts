@@ -1,4 +1,4 @@
-const ExceptionType = require('./exceptions.type');
+import ExceptionType from './exceptions.type';
 import { Request, Response, NextFunction } from 'express';
 
 function isValidUserId(req: Request, res: Response, next: NextFunction) {
