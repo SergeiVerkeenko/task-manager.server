@@ -1,6 +1,6 @@
-import { handleError } from "../../helper/handleError";
+import { handleError } from "../../../helper/handleError";
 import { Request, Response, NextFunction } from 'express';
-import ExceptionType from "../../helper/exceptions.type";
+import ExceptionType from "../../../helper/exceptions.type";
 describe('hendleError', () => {
     test('SUCCESS', () => {
         const mResponse:Response = {
