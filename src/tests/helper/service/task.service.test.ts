@@ -40,7 +40,7 @@ describe('test getTasks', () => {
         await getTasks()
 
         expect(mock).toHaveBeenCalled()
-        
+
 
     })
     test('test is null', async () => {
@@ -61,27 +61,135 @@ describe('test getTasks', () => {
 })
 describe('test getTasksID', () => {
     test('test', async () => {
-        const mock = jest.spyOn(repository, 'getTasksDB')
+        const mock = jest.spyOn(repository, 'getTaskByIDDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
 
-        await getTasks()
+        const result = await getTaskByID(1)
+        expect(result[0].user_id).toBe(1)
 
         expect(mock).toHaveBeenCalled()
-        
+
 
     })
     test('test is null', async () => {
-        const mock = jest.spyOn(repository, 'getTasksDB')
+        const mock = jest.spyOn(repository, 'getTaskByIDDB')
 
         mock.mockResolvedValue([{}])
 
         try {
-            await getTasks()
+            await getTaskByID(1)
 
         } catch (error: any) {
             expect(mock).toHaveBeenCalled()
             expect(error.message).toBe(ExceptionType.GET_TASKS_NOT_FOUND.message)
+
+        }
+    })
+
+})
+describe('test updateTask', () => {
+    test('test', async () => {
+        const mock = jest.spyOn(repository, 'updateTaskDB')
+
+        mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
+
+        const result = await updateTask(1, 'task', 1)
+
+        expect(mock).toHaveBeenCalled()
+        expect(result[0].user_id).toBe(1)
+        expect(result[0].id).toBe(1)
+        expect(result[0].task).toBe('task')
+
+
+
+    })
+    test('test is null', async () => {
+        const mock = jest.spyOn(repository, 'updateTaskDB')
+
+        mock.mockResolvedValue([{}])
+
+        try {
+            await updateTask(1, 'task', 1)
+
+        } catch (error: any) {
+            expect(mock).toHaveBeenCalled()
+            expect(error.message).toBe(ExceptionType.PUT_TASK_NOT_FOUND.message)
+
+        }
+    })
+
+})
+describe('test deleteTask', () => {
+    test('test', async () => {
+        const mock = jest.spyOn(repository, 'deleteTaskDB')
+
+        mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
+
+        const result = await deleteTask(1)
+
+        expect(mock).toHaveBeenCalled()
+        expect(result[0].id).toBe(1)
+
+
+
+    })
+    test('test is null', async () => {
+        const mock = jest.spyOn(repository, 'deleteTaskDB')
+
+        mock.mockResolvedValue([{}])
+
+        try {
+            await deleteTask(1)
+
+        } catch (error: any) {
+            expect(mock).toHaveBeenCalled()
+            expect(error.message).toBe(ExceptionType.DELETE_TASK_NOT_FOUND.message)
+
+        }
+    })
+
+})
+describe('test patchTask', () => {
+    test('test', async () => {
+        const mock = jest.spyOn(repository, 'patchTaskDB')
+
+        mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
+
+        const result = await patchTask(1, { task: 'task' })
+
+        expect(mock).toHaveBeenCalled()
+        expect(result[0].id).toBe(1)
+        expect(result[0].task).toBe('task')
+
+
+
+    })
+    test('test', async () => {
+        const mock = jest.spyOn(repository, 'patchTaskDB')
+
+        mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
+
+        const result = await patchTask(1, { user_id: 1 })
+
+        expect(mock).toHaveBeenCalled()
+        expect(result[0].id).toBe(1)
+        expect(result[0].user_id).toBe(1)
+
+
+
+    })
+    test('test is null', async () => {
+        const mock = jest.spyOn(repository, 'patchTaskDB')
+
+        mock.mockResolvedValue([{}])
+
+        try {
+            await patchTask(1, { task: 'task' })
+
+        } catch (error: any) {
+            expect(mock).toHaveBeenCalled()
+            expect(error.message).toBe(ExceptionType.PATCH_TASK_NOT_FOUND.message)
 
         }
     })
