@@ -22,7 +22,7 @@ describe("createUser function", () => {
             await createUser("name", "surname", "pwd", "email@mail.ru")
         } catch (error: any) {
             expect(mock).toHaveBeenCalled()
-            expect(error.message).toBe(ExceptionType.GET_USER_NOT_FOUND.message)
+            expect(error.message).toBe(ExceptionType.CREATE_TASK_NOT_FOUND.message)
         }
     })
 })

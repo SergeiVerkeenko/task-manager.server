@@ -9,6 +9,7 @@ async function createUserDB(name: string, surname: string, email: string, pwd: s
 
     await client.query(sql, [name, surname, email, pwd]);
     await client.query('COMMIT');
+    
   } catch (error) {
     await client.query('ROLLBACK');
     console.log(error);

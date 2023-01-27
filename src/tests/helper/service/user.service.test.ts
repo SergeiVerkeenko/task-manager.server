@@ -81,7 +81,7 @@ describe("updateUsers function", () => {
     })
 })
 describe("pachtUsers function", () => {
-    test("should return succes", async () => {
+    test("should return succes is name", async () => {
         const mock = jest.spyOn(repository, "pachtUsersDB")
 
         mock.mockResolvedValue([{ id: 1, name: "sergei", surname: "verk", pwd: "1303", email: "s@mail.ru", status: 1 }])
@@ -90,7 +90,7 @@ describe("pachtUsers function", () => {
         expect(result[0].name).toBe("sergei")
         expect(mock).toHaveBeenCalled()
     })
-    test("should return succes", async () => {
+    test("should return succes is surname", async () => {
         const mock = jest.spyOn(repository, "pachtUsersDB")
 
         mock.mockResolvedValue([{ id: 1, name: "sergei", surname: "verk", pwd: "1303", email: "s@mail.ru", status: 1 }])
@@ -99,7 +99,7 @@ describe("pachtUsers function", () => {
         expect(result[0].surname).toBe("verk")
         expect(mock).toHaveBeenCalled()
     })
-    test("should return succes", async () => {
+    test("should return succes is email", async () => {
         const mock = jest.spyOn(repository, "pachtUsersDB")
 
         mock.mockResolvedValue([{ id: 1, name: "sergei", surname: "verk", pwd: "1303", email: "s@mail.ru", status: 1 }])
@@ -108,7 +108,7 @@ describe("pachtUsers function", () => {
         expect(result[0].email).toBe("s@mail.ru")
         expect(mock).toHaveBeenCalled()
     })
-    test("should return succes", async () => {
+    test("should return succes is status", async () => {
         const mock = jest.spyOn(repository, "pachtUsersDB")
 
         mock.mockResolvedValue([{ id: 1, name: "sergei", surname: "verk", pwd: "1303", email: "s@mail.ru", status: 1 }])
@@ -117,7 +117,7 @@ describe("pachtUsers function", () => {
         expect(result[0].status).toBe(1)
         expect(mock).toHaveBeenCalled()
     })
-    test("should return succes", async () => {
+    test("should return succes is pwd", async () => {
         const mock = jest.spyOn(repository, "pachtUsersDB")
 
         mock.mockResolvedValue([{ id: 1, name: "sergei", surname: "verk", pwd: "1303", email: "s@mail.ru", status: 1 }])

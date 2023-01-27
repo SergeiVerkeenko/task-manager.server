@@ -2,7 +2,7 @@ import { createTask, getTasks, getTaskByID, updateTask, deleteTask, patchTask } 
 import * as repository from '../../../repository/task.repository'
 import ExceptionType from '../../../helper/exceptions.type';
 
-describe('test createTaskDB', () => {
+describe('function createTaskDB', () => {
     test('test', async () => {
         const mock = jest.spyOn(repository, 'createTaskDB')
 
@@ -15,7 +15,7 @@ describe('test createTaskDB', () => {
         expect(result[0].user_id).toBe(1)
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'createTaskDB')
 
         mock.mockResolvedValue([{}])
@@ -31,8 +31,8 @@ describe('test createTaskDB', () => {
     })
 
 })
-describe('test getTasks', () => {
-    test('test', async () => {
+describe('function getTasks', () => {
+    test('should return succes', async () => {
         const mock = jest.spyOn(repository, 'getTasksDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -43,7 +43,7 @@ describe('test getTasks', () => {
 
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'getTasksDB')
 
         mock.mockResolvedValue([{}])
@@ -59,8 +59,8 @@ describe('test getTasks', () => {
     })
 
 })
-describe('test getTasksID', () => {
-    test('test', async () => {
+describe('function getTasksID', () => {
+    test('should return succes', async () => {
         const mock = jest.spyOn(repository, 'getTaskByIDDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -72,7 +72,7 @@ describe('test getTasksID', () => {
 
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'getTaskByIDDB')
 
         mock.mockResolvedValue([{}])
@@ -88,8 +88,8 @@ describe('test getTasksID', () => {
     })
 
 })
-describe('test updateTask', () => {
-    test('test', async () => {
+describe('function updateTask', () => {
+    test('should return succes', async () => {
         const mock = jest.spyOn(repository, 'updateTaskDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -104,7 +104,7 @@ describe('test updateTask', () => {
 
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'updateTaskDB')
 
         mock.mockResolvedValue([{}])
@@ -120,8 +120,8 @@ describe('test updateTask', () => {
     })
 
 })
-describe('test deleteTask', () => {
-    test('test', async () => {
+describe('function deleteTask', () => {
+    test('should return succes', async () => {
         const mock = jest.spyOn(repository, 'deleteTaskDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -134,7 +134,7 @@ describe('test deleteTask', () => {
 
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'deleteTaskDB')
 
         mock.mockResolvedValue([{}])
@@ -150,8 +150,8 @@ describe('test deleteTask', () => {
     })
 
 })
-describe('test patchTask', () => {
-    test('test', async () => {
+describe('function patchTask', () => {
+    test('should return succes with task', async () => {
         const mock = jest.spyOn(repository, 'patchTaskDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -165,7 +165,7 @@ describe('test patchTask', () => {
 
 
     })
-    test('test', async () => {
+    test('should return succes with user_id', async () => {
         const mock = jest.spyOn(repository, 'patchTaskDB')
 
         mock.mockResolvedValue([{ id: 1, task: 'task', user_id: 1 }])
@@ -179,7 +179,7 @@ describe('test patchTask', () => {
 
 
     })
-    test('test is null', async () => {
+    test('should return exception: is not null', async () => {
         const mock = jest.spyOn(repository, 'patchTaskDB')
 
         mock.mockResolvedValue([{}])
