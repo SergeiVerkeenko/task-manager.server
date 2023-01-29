@@ -53,7 +53,6 @@ async function pachtUsersDB(id: number, dataFromClient: iUser) {
     const sql = 'SELECT * FROM users WHERE id=$1';
     const data = (await client.query(sql, [id])).rows[0];
     const mergeData = { ...data, ...dataFromClient };
-    console.log( mergeData);
     const sql2 = 'UPDATE users SET name = $1, surname = $2,pwd=$3, email=$4, status=$5 WHERE id=$6 RETURNING *';
     const data2 = (await client.query(sql2, [mergeData.name, mergeData.surname, mergeData.pwd, mergeData.email, mergeData.status, id])).rows;
     await client.query('COMMIT');
