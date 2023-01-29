@@ -17,6 +17,7 @@ async function doAuthorisation(email: string, pwd: string): Promise<void> {
   if (!foundUser.length) throw new Error(ExceptionType.AUTH_USER_WITH_EMAIL.message);
 
   const hashedPwd = foundUser[0].pwd;
+  console.log(hashedPwd);
 
   if (!(await bcrypt.compare(pwd, hashedPwd))) throw new Error(ExceptionType.AUTH_USER_WITH_PWD.message);
 }
